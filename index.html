@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pragma Softwares — AI-Native Software Studio</title>
+  <meta name="description" content="Pragma Softwares is an AI-native product studio. We build intelligent software, agents and interfaces for companies that refuse to wait — strategy to shipped, no handoffs." />
+  <meta name="theme-color" content="#07070B" />
+  <meta property="og:title" content="Pragma Softwares — AI-Native Product Studio" />
+  <meta property="og:description" content="We build intelligent software for companies that refuse to wait. AI products, agents and interfaces, engineered end to end." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b5cff'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%2307070b'/%3E%3Cpath d='M10 24V8h7a5 5 0 0 1 0 10h-7' fill='none' stroke='url(%23g)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind (CDN) + Nebula config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: '#07070B', 'bg-2': '#0B0B12', 'bg-3': '#101019',
+            ink: '#ECECF2', muted: '#A9A9BC', faint: '#7C7C90',
+            violet: '#6D4DFF', glow: '#8B5CFF', cyan: '#22D3EE', cyan2: '#34E7E4',
+            line: 'rgba(255,255,255,0.08)',
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            mono: ['"Space Mono"', 'monospace'],
+          },
+          maxWidth: { shell: '1320px' },
+        },
+      },
+      corePlugins: { preflight: false },
+    };
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.11/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js" defer></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+
+<body class="font-body bg-bg text-ink antialiased">
+
+  <!-- Overlays -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-label" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <div class="shell w-full flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3 group" aria-label="Pragma Softwares home" data-magnetic="0.2">
+        <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8b5cff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+          <rect x="0.5" y="0.5" width="31" height="31" rx="8" stroke="rgba(255,255,255,0.12)"/>
+          <path d="M10 24V8h7a5 5 0 0 1 0 10h-7" stroke="url(#lg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="font-display font-semibold text-[17px] tracking-tight">Pragma<span class="text-faint font-normal"> Softwares</span></span>
+      </a>
+
+      <nav class="hidden lg:flex items-center gap-9" aria-label="Primary">
+        <a href="#work" class="nav-link" data-magnetic="0.25">Work</a>
+        <a href="#services" class="nav-link" data-magnetic="0.25">Capabilities</a>
+        <a href="#process" class="nav-link" data-magnetic="0.25">Process</a>
+        <a href="#intelligence" class="nav-link" data-magnetic="0.25">Intelligence</a>
+        <a href="#contact" class="nav-link" data-magnetic="0.25">Studio</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="btn btn-primary hidden sm:inline-flex magnetic" data-magnetic="0.4" data-cursor="hover">
+          Start a project <span class="btn-ico" aria-hidden="true">→</span>
+        </a>
+        <button id="menu-toggle" class="lg:hidden w-11 h-11 grid place-items-center glass rounded-xl" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="block w-5 h-[1.5px] bg-ink relative before:content-[''] before:absolute before:-top-1.5 before:left-0 before:w-5 before:h-[1.5px] before:bg-ink after:content-[''] after:absolute after:top-1.5 after:left-0 after:w-5 after:h-[1.5px] after:bg-ink"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" aria-hidden="true" class="fixed inset-0 z-[999] bg-bg/95 backdrop-blur-xl translate-x-full invisible transition-[transform,visibility] duration-500 [&.open]:translate-x-0 [&.open]:visible lg:hidden">
+    <div class="h-full flex flex-col justify-center gap-2 px-8">
+      <a href="#services" class="font-display text-4xl py-2">Capabilities</a>
+      <a href="#work" class="font-display text-4xl py-2">Work</a>
+      <a href="#process" class="font-display text-4xl py-2">Process</a>
+      <a href="#intelligence" class="font-display text-4xl py-2">Intelligence</a>
+      <a href="#contact" class="font-display text-4xl py-2">Studio</a>
+      <a href="#contact" class="btn btn-primary mt-8 self-start">Start a project →</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="relative min-h-[100svh] flex flex-col justify-center overflow-hidden pt-28 pb-16">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-glow" style="width:620px;height:620px;background:radial-gradient(circle,#6d4dff,transparent 62%);top:-180px;left:-120px;opacity:.6"></div>
+      <div class="hero-glow" style="width:540px;height:540px;background:radial-gradient(circle,#22d3ee,transparent 62%);bottom:-200px;right:-100px;opacity:.45"></div>
+      <div class="grid-bg"></div>
+
+      <div id="hero-content" class="shell relative z-[5] w-full">
+        <div class="badge mb-8 pre-hide" data-hero-fade>
+          <span class="pulse"></span> AI-Native Product Studio — Systems, not slides
+        </div>
+
+        <h1 id="hero-title" class="display text-balance text-[clamp(36px,6.6vw,108px)] max-w-[16ch]">
+          We build <span class="gradient-text">intelligent</span> software for companies that refuse to <span class="gradient-text">wait</span>.
+        </h1>
+
+        <p class="mt-8 text-lg md:text-xl text-muted max-w-xl pre-hide" data-hero-fade>
+          Pragma designs and engineers AI products, agents and interfaces end to end. Strategy to shipped — no handoffs, no theatre.
+        </p>
+
+        <div class="mt-11 flex flex-wrap items-center gap-4 pre-hide" data-hero-fade>
+          <a href="#contact" class="btn btn-primary magnetic" data-magnetic="0.4" data-cursor="hover">
+            Start a project <span class="btn-ico" aria-hidden="true">→</span>
+          </a>
+          <a href="#work" class="btn btn-ghost magnetic" data-magnetic="0.3" data-cursor="hover">
+            <span class="w-2 h-2 rounded-full bg-cyan2"></span> See the work
+          </a>
+        </div>
+
+        <!-- status ticker -->
+        <div class="mt-16 flex flex-wrap items-center gap-x-7 gap-y-3 font-mono text-[12px] text-faint pre-hide" data-hero-fade>
+          <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan2 inline-block"></span> SYSTEMS NOMINAL</span>
+          <span class="hidden sm:inline">14 AGENTS LIVE</span>
+          <span class="hidden md:inline">99.98% UPTIME</span>
+          <span class="hidden lg:inline">SHIPPING FROM 6 TIMEZONES</span>
+        </div>
+      </div>
+
+      <!-- scroll cue -->
+      <a href="#services" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-[5] flex flex-col items-center gap-3 text-faint pre-hide" data-hero-fade aria-label="Scroll down">
+        <span class="font-mono text-[10px] tracking-[0.3em]">SCROLL</span>
+        <span class="w-[1px] h-12 bg-gradient-to-b from-cyan2/70 to-transparent"></span>
+      </a>
+    </section>
+
+    <!-- ============ TRUSTED / STACK MARQUEE ============ -->
+    <section class="py-16 border-y border-line overflow-hidden">
+      <p class="shell eyebrow mb-9" data-reveal="fade">The modern stack we engineer on</p>
+      <div data-marquee="55" data-dir="left" class="overflow-hidden">
+        <div class="marquee">
+          <div class="marquee-track logo-strip font-display">
+            <span class="logo-word">TypeScript</span>
+            <span class="logo-word">React</span>
+            <span class="logo-word">Next.js</span>
+            <span class="logo-word">Python</span>
+            <span class="logo-word">PyTorch</span>
+            <span class="logo-word">PostgreSQL</span>
+            <span class="logo-word">pgvector</span>
+            <span class="logo-word">Rust</span>
+            <span class="logo-word">Go</span>
+            <span class="logo-word">AWS</span>
+            <span class="logo-word">Cloudflare</span>
+            <span class="logo-word">Kubernetes</span>
+            <span class="logo-word">Vercel</span>
+            <span class="logo-word">LangGraph</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MANIFESTO ============ -->
+    <section class="section-light py-32 md:py-52">
+      <div class="shell">
+        <p class="eyebrow mb-12" data-reveal="fade">Our premise</p>
+        <h2 data-reveal="lines" class="display text-[clamp(28px,4.6vw,68px)] max-w-[22ch] leading-[1.08]">
+          Most software waits for instructions. We build the kind that <span class="gradient-text">thinks, decides, and ships</span> while the rest still buffer.
+        </h2>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES / BENTO ============ -->
+    <section id="services" class="py-24 md:py-32">
+      <div class="shell">
+        <div class="kicker-row mb-16">
+          <div class="section-head">
+            <p class="eyebrow" data-reveal="fade">01 / Capabilities</p>
+            <h2 class="display text-[clamp(32px,5vw,68px)] max-w-[15ch]" data-reveal="lines">Everything between the idea and the interface.</h2>
+          </div>
+          <p class="text-muted max-w-sm" data-reveal="fade">One studio, the full stack of intelligence — from the model layer to the pixel. We own the parts most teams hand off.</p>
+        </div>
+
+        <div class="bento" data-reveal-group>
+          <!-- 1 large -->
+          <article class="bento-card col-4 row-2 flex flex-col justify-between min-h-[340px] hairline-grad" data-reveal-item data-cursor="hover" data-tilt>
+            <div class="bento-icon"><i data-lucide="brain-circuit"></i></div>
+            <div>
+              <h3 class="font-display text-3xl md:text-4xl mb-3">Applied AI</h3>
+              <p class="text-muted max-w-md">We take frontier models and turn them into products people actually depend on daily — retrieval, reasoning, evals and guardrails, not a chatbot bolted to the side.</p>
+              <div class="flex flex-wrap gap-2 mt-6">
+                <span class="tag">RAG</span><span class="tag">Evals</span><span class="tag">Fine-tuning</span><span class="tag">Guardrails</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="bento-card col-2 min-h-[160px] flex flex-col justify-between" data-reveal-item data-cursor="hover" data-tilt>
+            <div class="bento-icon"><i data-lucide="bot"></i></div>
+            <div><h3 class="font-display text-2xl mb-1.5">Agentic Systems</h3><p class="text-muted text-sm">Agents that reason, act, and self-correct across your real tools.</p></div>
+          </article>
+
+          <article class="bento-card col-2 min-h-[160px] flex flex-col justify-between" data-reveal-item data-cursor="hover" data-tilt>
+            <div class="bento-icon"><i data-lucide="boxes"></i></div>
+            <div><h3 class="font-display text-2xl mb-1.5">Product Engineering</h3><p class="text-muted text-sm">Full-stack builds that ship fast and hold up under real load.</p></div>
+          </article>
+
+          <article class="bento-card col-2 min-h-[160px] flex flex-col justify-between" data-reveal-item data-cursor="hover" data-tilt>
+            <div class="bento-icon"><i data-lucide="layout-panel-left"></i></div>
+            <div><h3 class="font-display text-2xl mb-1.5">Interfaces</h3><p class="text-muted text-sm">Motion-led front ends where every interaction feels deliberate.</p></div>
+          </article>
+
+          <article class="bento-card col-2 min-h-[160px] flex flex-col justify-between" data-reveal-item data-cursor="hover" data-tilt>
+            <div class="bento-icon"><i data-lucide="database"></i></div>
+            <div><h3 class="font-display text-2xl mb-1.5">Data & Infra</h3><p class="text-muted text-sm">Pipelines, retrieval and evals that make intelligence reliable.</p></div>
+          </article>
+
+          <article class="bento-card col-2 min-h-[160px] flex flex-col justify-between" data-reveal-item data-cursor="hover" data-tilt>
+            <div class="bento-icon"><i data-lucide="compass"></i></div>
+            <div><h3 class="font-display text-2xl mb-1.5">Strategy & Design</h3><p class="text-muted text-sm">We pressure-test the idea, then design the product worth building.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK ============ -->
+    <section id="work" class="py-24 md:py-32">
+      <div class="shell">
+        <div class="kicker-row mb-16">
+          <div class="section-head">
+            <p class="eyebrow" data-reveal="fade">02 / Selected work</p>
+            <h2 class="display text-[clamp(32px,5vw,68px)]" data-reveal="lines">Proof, not promises.</h2>
+          </div>
+          <a href="#contact" class="btn btn-ghost magnetic self-end" data-magnetic="0.3" data-cursor="hover">All case studies →</a>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-7" data-reveal-group>
+          <!-- card 1 -->
+          <article class="work-card group" data-reveal-item data-cursor="link" data-cursor-label="View case" data-tilt>
+            <div class="work-visual">
+              <div class="mock-backlight" style="--c1:rgba(139,92,255,.55);--c2:rgba(34,211,238,.4)"></div>
+              <div class="absolute inset-0 grid-bg opacity-25"></div>
+              <div class="layer">
+                <div class="mock-card font-mono">
+                  <div class="mock-head">
+                    <span class="mock-dot" style="background:#ff5f57"></span><span class="mock-dot" style="background:#febc2e"></span><span class="mock-dot" style="background:#28c840"></span>
+                    <span class="text-[10px] text-faint ml-2">halcyon · research</span>
+                    <span class="ml-auto text-[10px] text-cyan2">● LIVE</span>
+                  </div>
+                  <div class="p-4">
+                    <div class="flex items-end justify-between mb-3">
+                      <div><div class="text-[10px] text-faint mb-0.5">EXPOSURE</div><div class="text-ink text-lg leading-none">$2.41B</div></div>
+                      <div class="text-cyan2 text-[11px]">▲ 4.2%</div>
+                    </div>
+                    <svg viewBox="0 0 240 52" class="w-full h-11 mb-3" preserveAspectRatio="none" aria-hidden="true">
+                      <defs><linearGradient id="spk1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8b5cff"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+                      <polyline fill="none" stroke="url(#spk1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="0,42 24,38 48,40 72,28 96,32 120,20 144,24 168,12 192,16 216,6 240,9"/>
+                    </svg>
+                    <div class="mock-row"><span class="text-muted text-[11px]">NVDA · momentum</span><span class="text-cyan2 text-[11px]">+12.4%</span></div>
+                    <div class="mock-row"><span class="text-muted text-[11px]">TSLA · reversal</span><span class="text-[11px]" style="color:#ff7a7a">−3.1%</span></div>
+                    <div class="mock-row" style="border-bottom:0"><span class="text-muted text-[11px]">agent · 14 signals</span><span class="text-glow text-[11px]">acting…</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute left-6 top-6 z-10 font-mono text-[11px] text-muted">01 — FINTECH / CAPITAL MARKETS</div>
+            </div>
+            <div class="p-7 bg-bg-2/60">
+              <div class="meta-row mb-3">
+                <h3 class="font-display text-2xl md:text-3xl">Halcyon Capital</h3>
+                <span class="font-display text-cyan2 text-xl">12× <span class="text-faint text-sm font-body">faster research</span></span>
+              </div>
+              <p class="text-muted mb-5">An autonomous research agent that reads markets faster than any desk.</p>
+              <div class="flex flex-wrap gap-2"><span class="tag">Agentic AI</span><span class="tag">Real-time data</span><span class="tag">Trading UX</span></div>
+            </div>
+          </article>
+
+          <!-- card 2 -->
+          <article class="work-card group md:mt-16" data-reveal-item data-cursor="link" data-cursor-label="View case" data-tilt>
+            <div class="work-visual">
+              <div class="mock-backlight" style="--c1:rgba(34,211,238,.5);--c2:rgba(139,92,255,.42);--bx:82%"></div>
+              <div class="absolute inset-0 grid-bg opacity-25"></div>
+              <div class="layer">
+                <div class="mock-card">
+                  <div class="mock-head">
+                    <span class="text-[10px] text-faint font-mono">patient · #4821 · intake</span>
+                    <span class="ml-auto text-[10px] font-mono text-glow">◆ AI drafting</span>
+                  </div>
+                  <div class="p-4">
+                    <div class="text-ink text-sm mb-3 font-medium">Progress note — draft</div>
+                    <div class="space-y-2.5">
+                      <div class="mock-bar accent" style="width:94%"></div>
+                      <div class="mock-bar" style="width:78%"></div>
+                      <div class="mock-bar" style="width:88%"></div>
+                      <div class="flex items-center gap-1.5"><div class="mock-bar" style="width:44%"></div><span class="caret" style="height:11px"></span></div>
+                    </div>
+                    <div class="mt-4 flex gap-2 font-mono">
+                      <span class="tag" style="font-size:10px;padding:3px 9px">SOAP</span>
+                      <span class="tag" style="font-size:10px;padding:3px 9px">ICD-10</span>
+                      <span class="tag" style="font-size:10px;padding:3px 9px;border-color:rgba(52,231,228,.3);color:#34e7e4">signed-off</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute left-6 top-6 z-10 font-mono text-[11px] text-muted">02 — HEALTHCARE / CLINICAL AI</div>
+            </div>
+            <div class="p-7 bg-bg-2/60">
+              <div class="meta-row mb-3">
+                <h3 class="font-display text-2xl md:text-3xl">Northwind Health</h3>
+                <span class="font-display text-cyan2 text-xl">−6 hrs <span class="text-faint text-sm font-body">/wk per clinician</span></span>
+              </div>
+              <p class="text-muted mb-5">A clinical copilot that drafts notes while doctors stay with patients.</p>
+              <div class="flex flex-wrap gap-2"><span class="tag">Applied AI</span><span class="tag">Compliance</span><span class="tag">Workflow</span></div>
+            </div>
+          </article>
+
+          <!-- card 3 -->
+          <article class="work-card group" data-reveal-item data-cursor="link" data-cursor-label="View case" data-tilt>
+            <div class="work-visual">
+              <div class="mock-backlight" style="--c1:rgba(139,92,255,.45);--c2:rgba(34,211,238,.4);--bx:50%"></div>
+              <div class="absolute inset-0 grid-bg opacity-25"></div>
+              <div class="layer">
+                <div class="mock-card">
+                  <div class="mock-head"><span class="text-[10px] text-faint font-mono">fleet · re-routing</span><span class="ml-auto text-[10px] font-mono text-cyan2">+23% margin</span></div>
+                  <div class="p-4">
+                    <svg viewBox="0 0 240 104" class="w-full h-24" aria-hidden="true">
+                      <defs><linearGradient id="rt3" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#8b5cff"/><stop offset="1" stop-color="#34e7e4"/></linearGradient></defs>
+                      <g stroke="rgba(255,255,255,.06)" stroke-width="1">
+                        <line x1="0" y1="26" x2="240" y2="26"/><line x1="0" y1="52" x2="240" y2="52"/><line x1="0" y1="78" x2="240" y2="78"/>
+                        <line x1="60" y1="0" x2="60" y2="104"/><line x1="120" y1="0" x2="120" y2="104"/><line x1="180" y1="0" x2="180" y2="104"/>
+                      </g>
+                      <polyline fill="none" stroke="url(#rt3)" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" points="14,88 70,66 112,74 162,34 226,18"/>
+                      <circle cx="14" cy="88" r="3.5" fill="#8b5cff"/><circle cx="112" cy="74" r="3.5" fill="#22d3ee"/><circle cx="226" cy="18" r="5" fill="#34e7e4"/>
+                    </svg>
+                    <div class="mock-row mt-1" style="border-bottom:0"><span class="text-muted font-mono text-[11px]">routes optimized</span><span class="text-cyan2 font-mono text-[11px]">1,284 / hr</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute left-6 top-6 z-10 font-mono text-[11px] text-muted">03 — SUPPLY CHAIN / OPERATIONS</div>
+            </div>
+            <div class="p-7 bg-bg-2/60">
+              <div class="meta-row mb-3">
+                <h3 class="font-display text-2xl md:text-3xl">Vanta Logistics</h3>
+                <span class="font-display text-cyan2 text-xl">+23% <span class="text-faint text-sm font-body">freight margin</span></span>
+              </div>
+              <p class="text-muted mb-5">A routing brain that re-plans fleets the moment reality changes.</p>
+              <div class="flex flex-wrap gap-2"><span class="tag">Optimization</span><span class="tag">Data Infra</span><span class="tag">Dashboards</span></div>
+            </div>
+          </article>
+
+          <!-- card 4 -->
+          <article class="work-card group md:mt-16" data-reveal-item data-cursor="link" data-cursor-label="View case" data-tilt>
+            <div class="work-visual">
+              <div class="mock-backlight" style="--c1:rgba(34,211,238,.45);--c2:rgba(139,92,255,.45);--bx:15%"></div>
+              <div class="absolute inset-0 grid-bg opacity-25"></div>
+              <div class="layer">
+                <div class="mock-card">
+                  <div class="mock-head"><span class="text-[10px] text-faint font-mono">lumen · generate</span><span class="ml-auto text-[10px] font-mono text-glow">40k seats</span></div>
+                  <div class="p-4">
+                    <div class="grid grid-cols-4 gap-2 mb-3">
+                      <div class="aspect-square rounded-md" style="background:linear-gradient(135deg,#8b5cff,#22d3ee)"></div>
+                      <div class="aspect-square rounded-md" style="background:linear-gradient(135deg,#22d3ee,#6d4dff)"></div>
+                      <div class="aspect-square rounded-md" style="background:linear-gradient(135deg,#6d4dff,#34e7e4)"></div>
+                      <div class="aspect-square rounded-md" style="background:linear-gradient(135deg,#8b5cff,#0b0b12)"></div>
+                      <div class="aspect-square rounded-md" style="background:linear-gradient(135deg,#34e7e4,#8b5cff)"></div>
+                      <div class="aspect-square rounded-md" style="background:linear-gradient(135deg,#22d3ee,#0b0b12)"></div>
+                      <div class="aspect-square rounded-md border border-dashed border-white/20 grid place-items-center"><span class="text-glow text-[10px] font-mono">…</span></div>
+                      <div class="aspect-square rounded-md" style="background:linear-gradient(135deg,#6d4dff,#22d3ee)"></div>
+                    </div>
+                    <div class="flex items-center gap-2 rounded-lg border border-line px-3 py-2">
+                      <span class="text-cyan2 font-mono text-[11px]">›</span>
+                      <span class="text-muted font-mono text-[11px]">brand system — editorial, bold</span>
+                      <span class="caret ml-0.5" style="height:11px"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="absolute left-6 top-6 z-10 font-mono text-[11px] text-muted">04 — CREATIVE / SAAS</div>
+            </div>
+            <div class="p-7 bg-bg-2/60">
+              <div class="meta-row mb-3">
+                <h3 class="font-display text-2xl md:text-3xl">Lumen Studio</h3>
+                <span class="font-display text-cyan2 text-xl">40k <span class="text-faint text-sm font-body">seats in 90 days</span></span>
+              </div>
+              <p class="text-muted mb-5">A generative design surface that ships brand systems in an afternoon.</p>
+              <div class="flex flex-wrap gap-2"><span class="tag">GenAI</span><span class="tag">Interfaces</span><span class="tag">Product</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section id="process" class="section-light py-24 md:py-32">
+      <div class="shell">
+        <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-16">
+          <div class="lg:sticky lg:top-32 self-start">
+            <p class="eyebrow mb-6" data-reveal="fade">03 / How we work</p>
+            <h2 class="display text-[clamp(32px,5vw,64px)] mb-6" data-reveal="lines">Five moves. No filler.</h2>
+            <p class="text-muted max-w-sm mb-8" data-reveal="fade">No bloated decks. No mystery. A tight loop from the real constraint to shipped — usually in weeks, not quarters.</p>
+            <a href="#contact" class="btn btn-primary magnetic" data-magnetic="0.4" data-cursor="hover">Book an intro <span class="btn-ico">→</span></a>
+          </div>
+
+          <div id="process-steps" class="relative">
+            <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-line"><i id="process-fill" class="absolute inset-0 origin-top scale-y-0 bg-gradient-to-b from-glow to-cyan2"></i></div>
+            <div class="pl-10">
+              <div class="process-step active py-9" data-reveal="fade">
+                <div class="flex items-baseline gap-5"><span class="process-num font-display text-2xl text-glow">01</span><h3 class="font-display text-2xl md:text-3xl">Interrogate</h3></div>
+                <p class="text-muted mt-3 max-w-md">We attack the problem before the brief — finding the real constraint everyone else politely avoided.</p>
+              </div>
+              <div class="process-step py-9" data-reveal="fade">
+                <div class="flex items-baseline gap-5"><span class="process-num font-display text-2xl text-glow">02</span><h3 class="font-display text-2xl md:text-3xl">Architect</h3></div>
+                <p class="text-muted mt-3 max-w-md">We map the system, the model, and the edge cases before a single line gets written.</p>
+              </div>
+              <div class="process-step py-9" data-reveal="fade">
+                <div class="flex items-baseline gap-5"><span class="process-num font-display text-2xl text-glow">03</span><h3 class="font-display text-2xl md:text-3xl">Prototype</h3></div>
+                <p class="text-muted mt-3 max-w-md">A working slice in days, not decks — something you can click, break, and feel.</p>
+              </div>
+              <div class="process-step py-9" data-reveal="fade">
+                <div class="flex items-baseline gap-5"><span class="process-num font-display text-2xl text-glow">04</span><h3 class="font-display text-2xl md:text-3xl">Engineer</h3></div>
+                <p class="text-muted mt-3 max-w-md">We build for production from day one: tested, observable, and ready for real traffic.</p>
+              </div>
+              <div class="process-step py-9" data-reveal="fade">
+                <div class="flex items-baseline gap-5"><span class="process-num font-display text-2xl text-glow">05</span><h3 class="font-display text-2xl md:text-3xl">Ship & Sharpen</h3></div>
+                <p class="text-muted mt-3 max-w-md">We launch, watch it live, and keep tuning until the metrics stop arguing.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section class="py-24 md:py-28 border-y border-line">
+      <div class="shell grid grid-cols-2 lg:grid-cols-4 gap-y-14" data-reveal-group>
+        <div class="lg:px-10 lg:border-l lg:border-line" data-reveal-item>
+          <div class="font-mono text-[11px] tracking-[0.22em] text-faint mb-5">01 · SHIPPED</div>
+          <div class="stat-num text-[clamp(44px,6vw,84px)]"><span data-count="120">0</span><span class="text-faint">+</span></div>
+          <p class="text-muted mt-3 text-sm">Products shipped</p>
+        </div>
+        <div class="lg:px-10 lg:border-l lg:border-line" data-reveal-item>
+          <div class="font-mono text-[11px] tracking-[0.22em] text-glow mb-5">02 · SCALE</div>
+          <div class="stat-num text-[clamp(52px,7vw,98px)] gradient-text"><span data-count="40">0</span>M+</div>
+          <p class="text-muted mt-3 text-sm">Daily AI calls served</p>
+        </div>
+        <div class="lg:px-10 lg:border-l lg:border-line" data-reveal-item>
+          <div class="font-mono text-[11px] tracking-[0.22em] text-faint mb-5">03 · PROVEN</div>
+          <div class="stat-num text-[clamp(44px,6vw,84px)]"><span data-count="9">0</span><span class="text-faint"> yrs</span></div>
+          <p class="text-muted mt-3 text-sm">Building in production</p>
+        </div>
+        <div class="lg:px-10 lg:border-l lg:border-line" data-reveal-item>
+          <div class="font-mono text-[11px] tracking-[0.22em] text-faint mb-5">04 · RELIABLE</div>
+          <div class="stat-num text-[clamp(44px,6vw,84px)]"><span data-count="99.98" data-decimals="2">0</span><span class="text-faint">%</span></div>
+          <p class="text-muted mt-3 text-sm">Uptime across systems</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AI SPOTLIGHT ============ -->
+    <section id="intelligence" class="py-24 md:py-36 relative overflow-hidden">
+      <div class="hero-glow" style="width:560px;height:560px;background:radial-gradient(circle,#6d4dff,transparent 65%);top:10%;left:-160px;opacity:.35"></div>
+      <div class="shell relative z-[5] grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <p class="eyebrow mb-6" data-reveal="fade">04 / The intelligence layer</p>
+          <h2 class="display text-[clamp(32px,5vw,64px)] mb-6 max-w-[15ch]" data-reveal="lines">Our agents don't wait to be asked twice.</h2>
+          <p class="text-muted max-w-md mb-8" data-reveal="fade">We build systems that observe, decide and act — grounded in your data, your tools, and your rules. Not a chatbot bolted onto a form. Real autonomy, kept on a leash you control.</p>
+          <div class="flex flex-wrap gap-3" data-motion-group>
+            <span class="badge" data-motion-item>Reasoning + tool use</span>
+            <span class="badge" data-motion-item>Grounded retrieval</span>
+            <span class="badge" data-motion-item>Self-correcting evals</span>
+          </div>
+        </div>
+
+        <div id="ai-terminal" class="panel p-6 md:p-8 hairline-grad terminal" data-cursor="hover"
+          data-lines='[["prompt-line","› reconcile Q3 invoices across all ledgers"],["text-muted","◦ retrieving ledgers · 3 sources…"],["text-ink","✓ parsed 1,284 line items"],["text-ink","⚠ 3 mismatches flagged · $42,180 delta"],["text-ink","✓ corrections drafted · awaiting sign-off"],["prompt-line2","◆ resolved in 4.2s — you stay in control"]]'>
+          <div class="flex items-center gap-2 mb-5 pb-4 border-b border-line">
+            <span class="w-3 h-3 rounded-full bg-[#ff5f57]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#febc2e]"></span>
+            <span class="w-3 h-3 rounded-full bg-[#28c840]"></span>
+            <span class="ml-3 font-mono text-[11px] text-faint">pragma://intelligence</span>
+          </div>
+          <div class="terminal-output min-h-[180px]"></div>
+          <span class="caret"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TESTIMONIALS ============ -->
+    <section class="section-light py-24 md:py-32">
+      <div class="shell">
+        <p class="eyebrow mb-14" data-reveal="fade">What partners say</p>
+        <div class="grid md:grid-cols-2 gap-7" data-reveal-group>
+          <figure class="panel p-9 hairline-grad" data-reveal-item data-cursor="hover" data-tilt>
+            <blockquote class="text-xl md:text-2xl font-display leading-snug mb-7">"Pragma shipped in six weeks what our last vendor quoted for six months. Then it actually worked."</blockquote>
+            <figcaption class="flex items-center gap-4"><span class="w-11 h-11 rounded-full grid place-items-center border border-line bg-white/[0.04] font-mono text-[13px] text-muted shrink-0">DR</span><span><span class="block font-medium">Dana Reyes</span><span class="text-faint text-sm">VP Engineering · Halcyon Capital</span></span></figcaption>
+          </figure>
+          <figure class="panel p-9 hairline-grad" data-reveal-item data-cursor="hover" data-tilt>
+            <blockquote class="text-xl md:text-2xl font-display leading-snug mb-7">"They didn't build what we asked for. They built what we should have asked for."</blockquote>
+            <figcaption class="flex items-center gap-4"><span class="w-11 h-11 rounded-full grid place-items-center border border-line bg-white/[0.04] font-mono text-[13px] text-muted shrink-0">ML</span><span><span class="block font-medium">Marcus Lindqvist</span><span class="text-faint text-sm">Chief Product Officer · Northwind Health</span></span></figcaption>
+          </figure>
+          <figure class="panel p-9 hairline-grad" data-reveal-item data-cursor="hover" data-tilt>
+            <blockquote class="text-xl md:text-2xl font-display leading-snug mb-7">"The only studio I've worked with that argues about the right things — and is usually right."</blockquote>
+            <figcaption class="flex items-center gap-4"><span class="w-11 h-11 rounded-full grid place-items-center border border-line bg-white/[0.04] font-mono text-[13px] text-muted shrink-0">PA</span><span><span class="block font-medium">Priya Anand</span><span class="text-faint text-sm">Founder & CEO · Vanta Logistics</span></span></figcaption>
+          </figure>
+          <figure class="panel p-9 hairline-grad" data-reveal-item data-cursor="hover" data-tilt>
+            <blockquote class="text-xl md:text-2xl font-display leading-snug mb-7">"Fast, opinionated, and dangerously good at the details. We don't go anywhere else now."</blockquote>
+            <figcaption class="flex items-center gap-4"><span class="w-11 h-11 rounded-full grid place-items-center border border-line bg-white/[0.04] font-mono text-[13px] text-muted shrink-0">TM</span><span><span class="block font-medium">Theo Marchetti</span><span class="text-faint text-sm">Head of Design · Lumen Studio</span></span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BIG CTA ============ -->
+    <section id="contact" class="py-32 md:py-56 relative overflow-hidden">
+      <div class="grid-bg"></div>
+      <div class="hero-glow" style="width:680px;height:680px;background:radial-gradient(circle,#6d4dff,transparent 60%);top:50%;left:50%;transform:translate(-50%,-50%);opacity:.3"></div>
+      <div class="shell relative z-[5] text-center flex flex-col items-center">
+        <p class="eyebrow mb-8 mx-auto" data-reveal="fade">Let's build</p>
+        <h2 class="display text-[clamp(40px,8vw,124px)] leading-[0.95] max-w-[15ch]" data-reveal="lines">
+          Let's build something that <span class="gradient-text">thinks.</span>
+        </h2>
+        <p class="text-muted text-lg max-w-md mt-8" data-reveal="fade">Bring the ambitious idea. We'll bring the studio that ships it.</p>
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-11" data-reveal="fade">
+          <a href="mailto:hello@pragma.studio" class="btn btn-primary magnetic text-base" data-magnetic="0.4" data-cursor="hover">Start a project <span class="btn-ico">→</span></a>
+          <a href="mailto:hello@pragma.studio" class="font-mono text-sm text-muted hover:text-ink transition-colors" data-cursor="hover">or say hello — hello@pragma.studio</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="pt-24 border-t border-line overflow-hidden">
+      <div class="shell">
+        <div class="grid lg:grid-cols-[1.4fr_1fr] gap-16 pb-20">
+          <div>
+            <div class="flex items-center gap-3 mb-6">
+              <svg class="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <rect x="0.5" y="0.5" width="31" height="31" rx="8" stroke="rgba(255,255,255,0.12)"/>
+                <path d="M10 24V8h7a5 5 0 0 1 0 10h-7" stroke="url(#lg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="font-display font-semibold text-lg">Pragma Softwares</span>
+            </div>
+            <p class="text-muted max-w-sm">An AI-native software studio building intelligent products for companies that move first.</p>
+            <div class="flex gap-3 mt-8">
+              <a href="#" class="w-11 h-11 grid place-items-center rounded-xl glass" data-cursor="hover" aria-label="X / Twitter"><i data-lucide="twitter" class="w-[18px]"></i></a>
+              <a href="#" class="w-11 h-11 grid place-items-center rounded-xl glass" data-cursor="hover" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-[18px]"></i></a>
+              <a href="#" class="w-11 h-11 grid place-items-center rounded-xl glass" data-cursor="hover" aria-label="GitHub"><i data-lucide="github" class="w-[18px]"></i></a>
+              <a href="#" class="w-11 h-11 grid place-items-center rounded-xl glass" data-cursor="hover" aria-label="Dribbble"><i data-lucide="dribbble" class="w-[18px]"></i></a>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+            <div>
+              <h4 class="font-mono text-[11px] tracking-[0.2em] text-faint uppercase mb-5">Studio</h4>
+              <ul class="space-y-3 text-muted">
+                <li><a href="#services" class="hover:text-ink transition-colors" data-cursor="hover">Capabilities</a></li>
+                <li><a href="#work" class="hover:text-ink transition-colors" data-cursor="hover">Work</a></li>
+                <li><a href="#process" class="hover:text-ink transition-colors" data-cursor="hover">Process</a></li>
+                <li><a href="#intelligence" class="hover:text-ink transition-colors" data-cursor="hover">Intelligence</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-mono text-[11px] tracking-[0.2em] text-faint uppercase mb-5">Company</h4>
+              <ul class="space-y-3 text-muted">
+                <li><a href="#" class="hover:text-ink transition-colors" data-cursor="hover">About</a></li>
+                <li><a href="#" class="hover:text-ink transition-colors" data-cursor="hover">Careers</a></li>
+                <li><a href="#" class="hover:text-ink transition-colors" data-cursor="hover">Journal</a></li>
+                <li><a href="#contact" class="hover:text-ink transition-colors" data-cursor="hover">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-mono text-[11px] tracking-[0.2em] text-faint uppercase mb-5">Contact</h4>
+              <ul class="space-y-3 text-muted">
+                <li><a href="mailto:hello@pragma.studio" class="hover:text-ink transition-colors" data-cursor="hover">hello@pragma.studio</a></li>
+                <li class="text-faint">San Francisco</li>
+                <li class="text-faint">Remote · Global</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- giant wordmark -->
+        <div class="relative -mb-[3vw]">
+          <div class="footer-word select-none">PRAGMA</div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 py-8 border-t border-line">
+          <p class="text-faint text-sm font-mono">© <span id="year">2026</span> Pragma Softwares. All systems reserved.</p>
+          <p class="text-faint/70 text-sm font-mono hidden md:block">Designed & engineered in-house. No templates were harmed.</p>
+          <div class="flex gap-6 text-faint text-sm">
+            <a href="#" class="hover:text-ink transition-colors" data-cursor="hover">Privacy</a>
+            <a href="#" class="hover:text-ink transition-colors" data-cursor="hover">Terms</a>
+            <a href="#hero" class="hover:text-ink transition-colors" data-cursor="hover">Back to top ↑</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+</body>
+</html>

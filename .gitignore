@@ -1,0 +1,8 @@
+# Claude Code
+.claude/
+
+# Preview artifacts
+previews/
+
+# Dependencies
+node_modules/

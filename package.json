@@ -1,0 +1,10 @@
+{
+  "name": "pragma-softwares",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Pragma Softwares — AI-native software studio homepage (static HTML/Tailwind/JS)",
+  "scripts": {
+    "dev": "npx --yes serve@latest . -l 5181",
+    "start": "npx --yes serve@latest . -l 5181"
+  }
+}
