@@ -6,3 +6,6 @@ previews/
 
 # Dependencies
 node_modules/
+
+
+.playwright-mcp/

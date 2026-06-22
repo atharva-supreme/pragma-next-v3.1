@@ -110,7 +110,85 @@ function magnetic() {
 }
 
 /* ------------------------------------------------------------
-   5 · NAV
+   5 · NAV DROPDOWNS
+------------------------------------------------------------ */
+function navDropdowns() {
+  if (TOUCH) return;
+
+  const mega = $("#nav-mega");
+  if (!mega) return;
+
+  const sections = $$(".nav-mega-section", mega);
+  const roots = $$(".nav-drop-root");
+  let closeTimer = null;
+  let activeId = null;
+
+  const backdrop = document.createElement("div");
+  backdrop.className = "nav-backdrop";
+  document.body.appendChild(backdrop);
+
+  function showSection(id) {
+    sections.forEach((s) => s.classList.toggle("active", s.dataset.panelId === id));
+    activeId = id;
+  }
+
+  function setTriggers(id) {
+    roots.forEach((r) => {
+      const on = r.dataset.panel === id;
+      r.classList.toggle("open", on);
+      r.querySelector(".nav-link-btn")?.setAttribute("aria-expanded", on ? "true" : "false");
+    });
+  }
+
+  function openPanel(id) {
+    clearTimeout(closeTimer);
+    backdrop.classList.add("visible");
+    if (!mega.classList.contains("open")) {
+      // Panel is closed — load content first, then reveal
+      showSection(id);
+      mega.classList.add("open");
+      mega.setAttribute("aria-hidden", "false");
+    } else if (activeId !== id) {
+      // Panel already open — crossfade content only, box stays put
+      showSection(id);
+    }
+    setTriggers(id);
+  }
+
+  function closePanel() {
+    mega.classList.remove("open");
+    mega.setAttribute("aria-hidden", "true");
+    backdrop.classList.remove("visible");
+    setTriggers(null);
+    activeId = null;
+  }
+
+  function scheduleClose() {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(closePanel, 120);
+  }
+
+  roots.forEach((root) => {
+    root.addEventListener("mouseenter", () => openPanel(root.dataset.panel));
+    root.addEventListener("mouseleave", scheduleClose);
+  });
+
+  mega.addEventListener("mouseenter", () => clearTimeout(closeTimer));
+  mega.addEventListener("mouseleave", scheduleClose);
+
+  backdrop.addEventListener("click", closePanel);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { clearTimeout(closeTimer); closePanel(); }
+  });
+
+  $$("a", mega).forEach((a) => {
+    a.addEventListener("click", () => { clearTimeout(closeTimer); closePanel(); });
+  });
+}
+
+/* ------------------------------------------------------------
+   6 · NAV SCROLL HIDE/SHOW
 ------------------------------------------------------------ */
 function closeMenu() {
   const menu = $("#mobile-menu");
@@ -558,6 +636,7 @@ function startSite() {
   smoothScroll();
   cursor();
   magnetic();
+  navDropdowns();
   nav();
   heroCanvas();
   heroIntro();
@@ -600,3 +679,34 @@ window.addEventListener("load", () => ScrollTrigger && ScrollTrigger.refresh());
 document.addEventListener("visibilitychange", () => {
   document.body.classList.toggle("tab-hidden", document.hidden);
 });
+
+/* ------------------------------------------------------------
+   HERO TYPEWRITER
+------------------------------------------------------------ */
+(function () {
+  const tw = document.getElementById("tw");
+  if (!tw) return;
+  const phrases = [
+    "AI-powered analytics",
+    "intelligent automation",
+    "production ML pipelines",
+    "enterprise data platforms",
+    "LLM-native products",
+  ];
+  let pi = 0, ci = 0, deleting = false;
+  function type() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      tw.textContent = phrase.slice(0, ci + 1);
+      ci++;
+      if (ci === phrase.length) { deleting = true; setTimeout(type, 2200); return; }
+      setTimeout(type, 68);
+    } else {
+      tw.textContent = phrase.slice(0, ci - 1);
+      ci--;
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(type, 400); return; }
+      setTimeout(type, 38);
+    }
+  }
+  setTimeout(type, 1200);
+})();
