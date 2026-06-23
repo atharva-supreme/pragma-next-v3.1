@@ -107,7 +107,7 @@ export const AetherFlowCanvas: React.FC<AetherFlowCanvasProps> = ({ className = 
         const y = Math.random() * (canvas.height - size * 4) + size * 2;
         const directionX = Math.random() * 0.4 - 0.2;
         const directionY = Math.random() * 0.4 - 0.2;
-        const color = 'rgba(191, 128, 255, 0.8)'; // Brighter purple
+          const color = 'rgba(191, 128, 255, 0.8  )'; // Brighter purple
         particles.push(new Particle(x, y, directionX, directionY, size, color));
       }
     };

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Mono } from "next/font/google";
 import "./globals.css";
 import Overlays from "@/components/Overlays";
@@ -21,6 +21,9 @@ export const metadata: Metadata = {
       "We build intelligent software for companies that refuse to wait. AI products, agents and interfaces, engineered end to end.",
     type: "website",
   },
+};
+
+export const viewport: Viewport = {
   themeColor: "#07070B",
 };
 
