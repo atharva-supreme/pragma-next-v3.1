@@ -656,6 +656,33 @@ export default function AnimationsInit() {
       if (ScrollTrigger) ScrollTrigger.refresh();
       document.body.classList.add("ready");
 
+      /* ----------------------------------------------------------
+         RE-REFRESH after late-loading assets settle the layout.
+         On deployed hosts (e.g. GitHub Pages) fonts/images load
+         slower than on localhost, so a single early refresh leaves
+         ScrollTrigger with stale positions and some reveals never
+         fire (elements stay stuck at `.js [data-reveal]{opacity:0}`).
+      ---------------------------------------------------------- */
+      if (ScrollTrigger) {
+        const refresh = () => ScrollTrigger.refresh();
+
+        // After web fonts are ready (metrics change after font swap)
+        if (document.fonts?.ready) document.fonts.ready.then(refresh);
+
+        // After every sub-resource (images, etc.) has loaded
+        if (document.readyState === "complete") {
+          refresh();
+        } else {
+          window.addEventListener("load", refresh, { once: true });
+          cleanupFns.push(() => window.removeEventListener("load", refresh));
+        }
+
+        // Safety-net passes for anything that settles a beat later
+        const t1 = setTimeout(refresh, 600);
+        const t2 = setTimeout(refresh, 1500);
+        cleanupFns.push(() => { clearTimeout(t1); clearTimeout(t2); });
+      }
+
       const yearEl = document.getElementById("year");
       if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
