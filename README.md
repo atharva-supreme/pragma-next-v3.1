@@ -3,68 +3,76 @@
 An award-winning, dark-themed, AI-forward agency homepage for **Pragma Softwares**.
 Art direction: **"Nebula"** — near-black canvas, violet→cyan plasma, computational/futuristic.
 
-Built as a **static site** (no build step) so it's trivial to preview and later port to Next.js.
+## Tech Stack
 
-```
-HTML · Tailwind (CDN) · vanilla JS · Motion (motion.dev) · GSAP + ScrollTrigger · Lenis · SplitType · Lucide
-```
+| Layer | Tool |
+|---|---|
+| Framework | **Next.js 15** (App Router) |
+| Language | **TypeScript** |
+| Styles | **Tailwind CSS v3** (PostCSS) + custom CSS (`app/globals.css`) |
+| Animations | **GSAP 3.13** + **ScrollTrigger** |
+| Smooth scroll | **Lenis 1.3** |
+| Text splitting | **Split-Type 0.3.4** |
+| Icons | **Lucide React 0.460** |
+| Fonts | **Cerebri Sans** (local `/public/fonts/`) · **Space Mono** (Google Fonts via `next/font`) |
+| Dev server | `next dev` on port 3000 |
 
 ## Run it
 
-It's a static site — any static server works:
-
 ```bash
-# option A (Python)
-python -m http.server 5181
-
-# option B (Node)
-npx serve . -l 5181
-# or: npm run dev
+npm install
+npm run dev
 ```
 
-Then open <http://localhost:5181>. Opening `index.html` directly also works (libraries load from CDN; a server is recommended so ES-module imports resolve cleanly).
+Then open <http://localhost:3000>
 
 ## Structure
 
 ```
-index.html        # the whole page + Tailwind theme config (inline) + CDN <script> tags
-css/styles.css    # "Nebula" design system: tokens, cursor, grain, buttons, bento, reveals, responsive
-js/main.js        # interaction engine (modular): smooth scroll, cursor, magnetic,
-                  # reveals, hero plasma canvas, marquee, bento spotlight, work tilt,
-                  # process progress, count-ups, AI terminal, footer parallax
-brief/            # the AI-generated premium copy deck used for the final copy
-previews/         # the 4 art-direction concepts shown during selection
+app/
+  layout.tsx          Root layout — metadata, fonts, global providers
+  page.tsx            Main page assembling all section components
+  globals.css         "Nebula" design system: tokens, animations, responsive rules
+
+components/
+  Navigation.tsx      Fixed nav with mega dropdown panel + mobile menu
+  Hero.tsx            Full-height hero — rotating text, floating metric cards
+  StackMarquee.tsx    Infinite tech stack marquee
+  Manifesto.tsx       Brand premise section (light theme)
+  Services.tsx        Bento grid — 6 capability cards
+  Work.tsx            4 case study cards with animated mock UIs
+  Process.tsx         5-step process with sticky scroll progress bar
+  Stats.tsx           Animated stat counters (120+ products, 40M+ AI calls…)
+  Intelligence.tsx    AI terminal typewriter demo
+  Testimonials.tsx    4 client testimonials (light theme)
+  CTA.tsx             "Let's build something that thinks" call-to-action
+  Footer.tsx          Footer with social links + giant PRAGMA wordmark
+  Overlays.tsx        Grain texture, vignette, custom cursor dot
+  AnimationsInit.tsx  Client-side boot — wires up GSAP, Lenis, SplitType, all interactions
+
+public/
+  fonts/cerebri-sans/ Local font files (5 weights, woff + woff2)
+  images/             Logo and mark assets
 ```
 
-## Design system (tokens)
+## Design System (Nebula Tokens)
 
 | Token | Value | |
 |---|---|---|
 | `--bg` | `#07070B` | near-black canvas |
 | `--ink` | `#ECECF2` | primary text |
-| `--muted` / `--faint` | `#A9A9BC` / `#6E6E82` | secondary text |
+| `--muted` / `--faint` | `#A9A9BC` / `#7C7C90` | secondary / tertiary text |
 | `--violet` / `--glow` / `--cyan` | `#6D4DFF` / `#8B5CFF` / `#22D3EE` | accent ramp |
 | `--grad` | `linear-gradient(100deg,#8B5CFF,#22D3EE)` | signature gradient |
-| Display | **Space Grotesk** | headings (tight tracking) |
-| Body | **Inter** | copy |
+| Display / Body | **Cerebri Sans** | headings + copy |
 | Mono | **Space Mono** | eyebrows, labels, numerics |
 
-Tailwind utilities mirror these (`bg-bg`, `text-ink`, `text-muted`, `font-display`, `text-cyan2`, …) via the inline `tailwind.config` in `index.html`.
+Tailwind utilities mirror all tokens (`bg-bg`, `text-ink`, `text-muted`, `font-display`, `text-cyan2`, …) via `tailwind.config.ts`.
 
 ## Motion
 
-- **Lenis** smooth scroll, synced to the **GSAP** ticker; **ScrollTrigger** drives reveals.
-- **SplitType** line-masked reveals (line-based to preserve gradient-clipped words).
-- **Motion (motion.dev)** is lazy-loaded off the critical path (with a GSAP fallback) for the capability-chip entrances.
-- A `<canvas>` particle network (drifting nodes + cursor-reactive links) backs the hero; it caps DPR at 2 and pauses when offscreen.
-- Everything respects `prefers-reduced-motion` (animations disabled, content shown statically, cursor/grain hidden) and degrades gracefully if a CDN library fails to load.
-
-## Notes for the Next.js port
-
-- The page is one document; sections are clearly delimited by `<!-- ===== SECTION ===== -->` comments — each maps cleanly to a component.
-- Swap the Tailwind **CDN** for a real Tailwind install and move the inline `tailwind.config` into `tailwind.config.js`; move the tokens in `:root` into `@theme`.
-- Replace CDN `<script>` libs with the npm packages already implied (`motion` is installed; add `gsap`, `lenis`, `split-type`, `lucide`).
-- The page boots immediately on `DOMContentLoaded` (no preloader) for fast first contentful paint.
-- `window.PRAGMA` is a tiny QA hook (exposed only with `?qa=1`, inert in production) to force-boot during testing.
-```
-```
+- **Lenis** smooth scroll, synced to the **GSAP** ticker; **ScrollTrigger** drives all scroll-based reveals.
+- **SplitType** line-masked reveals — line-based to preserve gradient-clipped words.
+- **Motion (motion.dev)** is lazy-loaded off the critical path (with a GSAP fallback) for capability badge entrances.
+- Everything respects `prefers-reduced-motion` and degrades gracefully.
+- All animation code lives in `AnimationsInit.tsx` and runs inside a `useEffect` — no SSR conflicts.
