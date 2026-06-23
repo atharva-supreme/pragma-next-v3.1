@@ -844,11 +844,10 @@ body.tab-hidden .grain { animation-play-state: paused; }
 /* ============================================================
    ROTATING HERO TEXT
    ============================================================ */
-@property --rot-fill {
-  syntax: "<percentage>";
-  inherits: false;
-  initial-value: 0%;
-}
+/* NOTE: the `@property --rot-fill` registration lives in an inline <style> in
+   app/layout.tsx — see the comment there. Keeping it out of this minified
+   stylesheet prevents lightningcss from collapsing `0%` -> `0`, which would
+   make the rule invalid and break the rotating-word fill animation. */
 
 .rot-inline {
   display: inline-block;

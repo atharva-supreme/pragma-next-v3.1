@@ -39,6 +39,15 @@ export default function RootLayout({
           rel="icon"
           href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b5cff'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='%2307070b'/%3E%3Cpath d='M10 24V8h7a5 5 0 0 1 0 10h-7' fill='none' stroke='url(%23g)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"
         />
+        {/* Inline so the production CSS minifier can't strip the `%` from
+            initial-value (`0%` -> `0`), which would invalidate this @property
+            rule and break the hero text's liquid-fill animation. Keep in sync
+            with the gradient/keyframes in globals.css (.rot-word). */}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `@property --rot-fill{syntax:"<percentage>";inherits:false;initial-value:0%}`,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){var h=document.documentElement;h.classList.add('js');try{if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('reduced');}catch(e){}})();`,
