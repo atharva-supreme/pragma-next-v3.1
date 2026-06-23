@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={spaceMono.variable}>
+    <html lang="en" className={spaceMono.variable} suppressHydrationWarning>
       <head>
         <link
           rel="icon"
@@ -42,7 +42,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-body bg-bg text-ink antialiased">
+      <body className="font-body bg-bg text-ink antialiased" suppressHydrationWarning>
         <Overlays />
         {children}
         <AnimationsInit />
