@@ -9,7 +9,7 @@ const terminalLines = [
 
 export default function Intelligence() {
   return (
-    <section id="intelligence" className="py-24 md:py-36 relative overflow-hidden">
+    <section id="intelligence" className="py-16 md:py-24 lg:py-36 relative overflow-hidden">
       <div
         className="hero-glow"
         style={{
@@ -21,7 +21,7 @@ export default function Intelligence() {
           opacity: 0.35,
         }}
       />
-      <div className="shell relative z-[5] grid lg:grid-cols-2 gap-16 items-center">
+      <div className="shell relative z-[5] grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
           <p className="eyebrow mb-6" data-reveal="fade">04 / The intelligence layer</p>
           <h2

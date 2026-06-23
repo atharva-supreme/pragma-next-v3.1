@@ -29,9 +29,9 @@ const steps = [
 
 export default function Process() {
   return (
-    <section id="process" className="section-light py-24 md:py-32">
+    <section id="process" className="section-light py-16 md:py-24 lg:py-32">
       <div className="shell">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-16">
+        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16">
           <div className="lg:sticky lg:top-32 self-start">
             <p className="eyebrow mb-6" data-reveal="fade">03 / How we work</p>
             <h2 className="display text-[clamp(32px,5vw,64px)] mb-6" data-reveal="lines">

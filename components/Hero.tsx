@@ -28,8 +28,19 @@ export default function Hero() {
       <div className="relative z-10 max-w-[1300px] mx-auto w-full px-[var(--gutter)]">
         <div id="hero-content" className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-          {/* LEFT: Copy */}
-          <div className="max-w-[560px]">
+          {/* LEFT: Copy — centered on tablet/mobile, pinned left in the grid on desktop */}
+          <div className="relative max-w-[560px] mx-auto lg:mx-0">
+            {/* Feathered backdrop scrim — dims the busy particle bg behind the
+                copy for legibility, with soft radial edges so no panel box shows. */}
+            <div
+              className="absolute -inset-x-16 -inset-y-12 -z-10 pointer-events-none backdrop-brightness-50"
+              style={{
+                maskImage:
+                  "radial-gradient(115% 100% at 28% 50%, #000 32%, transparent 72%)",
+                WebkitMaskImage:
+                  "radial-gradient(115% 100% at 28% 50%, #000 32%, transparent 72%)",
+              }}
+            />
             {/* Status pill */}
             <div className="s-label pbadge mb-8 cursor-default pre-hide">
               Now accepting projects for Q3 2025

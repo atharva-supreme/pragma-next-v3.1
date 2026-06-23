@@ -329,7 +329,7 @@ body.tab-hidden .grain { animation-play-state: paused; }
 /* ---------- BENTO ---------- */
 .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
 .bento-card {
-  position: relative; overflow: hidden; border-radius: 22px; padding: 30px;
+  position: relative; overflow: hidden; border-radius: 22px; padding: clamp(20px, 5vw, 30px);
   background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01));
   border: 1px solid var(--line); transition: border-color .5s var(--e-out), transform .5s var(--e-out);
 }
@@ -693,15 +693,22 @@ body.tab-hidden .grain { animation-play-state: paused; }
 /* ---------- FOCUS ---------- */
 :focus-visible { outline: 2px solid var(--cyan-2); outline-offset: 3px; border-radius: 4px; }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 900px) {
+/* ---------- RESPONSIVE ----------
+   Standard breakpoints: lg 1024px (tablet & below), sm 640px (mobile).
+   Tablet keeps a 2-col bento — wide/feature cards span the full row while the
+   small capability cards sit 2-up; mobile collapses to a single column. */
+@media (max-width: 1023.98px) {
   .bento { grid-template-columns: repeat(2, 1fr); }
-  .col-2, .col-3, .col-4, .col-6 { grid-column: span 2; }
+  .col-2 { grid-column: span 1; }
+  .col-3, .col-4, .col-6 { grid-column: span 2; }
   .row-2 { grid-row: span 1; }
 }
-@media (max-width: 560px) {
+@media (max-width: 639.98px) {
   .bento { grid-template-columns: 1fr; }
   .col-2, .col-3, .col-4, .col-6 { grid-column: span 1; }
+  /* Section headings wrap to 3-4 lines on phones; the desktop 0.98 leading
+     makes those lines collide, so give wrapped mobile type a little air. */
+  .display { line-height: 1.07; }
 }
 
 /* ============================================================

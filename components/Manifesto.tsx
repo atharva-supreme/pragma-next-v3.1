@@ -2,7 +2,7 @@ import { FloatingPaths } from "@/components/ui/background-paths";
 
 export default function Manifesto() {
   return (
-    <section className="section-light py-32 md:py-52 overflow-hidden">
+    <section className="section-light py-20 md:py-36 lg:py-52 overflow-hidden">
       {/* Animated background paths — visible in the "Our premise" section only */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <FloatingPaths position={1} />

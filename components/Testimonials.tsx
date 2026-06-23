@@ -27,14 +27,14 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="section-light py-24 md:py-32">
+    <section className="section-light py-16 md:py-24 lg:py-32">
       <div className="shell">
-        <p className="eyebrow mb-14" data-reveal="fade">What partners say</p>
+        <p className="eyebrow mb-10 md:mb-14" data-reveal="fade">What partners say</p>
         <div className="grid md:grid-cols-2 gap-7" data-reveal-group>
           {testimonials.map((t) => (
             <figure
               key={t.initials}
-              className="panel p-9 hairline-grad"
+              className="panel p-6 md:p-9 hairline-grad"
               data-reveal-item
               data-cursor="hover"
               data-tilt

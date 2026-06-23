@@ -21,7 +21,7 @@ const LogoMark = () => (
 
 export default function Footer() {
   return (
-    <footer className="pt-24 border-t border-line overflow-hidden">
+    <footer className="pt-16 md:pt-24 border-t border-line overflow-hidden">
       <div className="shell">
         <div className="grid lg:grid-cols-[1.4fr_1fr] gap-16 pb-20">
           <div>

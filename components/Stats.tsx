@@ -7,7 +7,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="py-24 md:py-28 border-y border-line">
+    <section className="py-16 md:py-24 lg:py-28 border-y border-line">
       <div className="shell grid grid-cols-2 lg:grid-cols-4 gap-y-14" data-reveal-group>
         <div className="lg:px-10 lg:border-l lg:border-line" data-reveal-item>
           <div className="font-mono text-[11px] tracking-[0.22em] text-faint mb-5">01 · SHIPPED</div>

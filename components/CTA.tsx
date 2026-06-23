@@ -7,7 +7,7 @@ export default function CTA() {
   const containerRef = useRef<HTMLHeadingElement>(null);
 
   return (
-    <section id="contact" className="py-32 md:py-56 relative overflow-hidden">
+    <section id="contact" className="py-20 md:py-40 lg:py-56 relative overflow-hidden">
       <div className="grid-bg" />
 
       {/* Ambient depth — layered violet + cyan glows */}

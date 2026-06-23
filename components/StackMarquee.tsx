@@ -5,7 +5,7 @@ const stack = [
 
 export default function StackMarquee() {
   return (
-    <section className="py-16 border-y border-line overflow-hidden">
+    <section className="py-12 md:py-16 border-y border-line overflow-hidden">
       <p className="shell eyebrow mb-9" data-reveal="fade">
         The modern stack we engineer on
       </p>

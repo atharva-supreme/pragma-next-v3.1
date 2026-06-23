@@ -1,8 +1,8 @@
 export default function Work() {
   return (
-    <section id="work" className="py-24 md:py-32">
+    <section id="work" className="py-16 md:py-24 lg:py-32">
       <div className="shell">
-        <div className="kicker-row mb-16">
+        <div className="kicker-row mb-10 md:mb-16">
           <div className="section-head">
             <p className="eyebrow" data-reveal="fade">02 / Selected work</p>
             <h2 className="display text-[clamp(32px,5vw,68px)]" data-reveal="lines">
@@ -46,7 +46,7 @@ export default function Work() {
               </div>
               <div className="absolute left-6 top-6 z-10 font-mono text-[11px] text-muted">01 — FINTECH / CAPITAL MARKETS</div>
             </div>
-            <div className="p-7 bg-bg-2/60">
+            <div className="p-5 md:p-7 bg-bg-2/60">
               <div className="meta-row mb-3">
                 <h3 className="font-display text-2xl md:text-3xl">Halcyon Capital</h3>
                 <span className="font-display text-cyan2 text-xl">12× <span className="text-faint text-sm font-body">faster research</span></span>
@@ -85,7 +85,7 @@ export default function Work() {
               </div>
               <div className="absolute left-6 top-6 z-10 font-mono text-[11px] text-muted">02 — HEALTHCARE / CLINICAL AI</div>
             </div>
-            <div className="p-7 bg-bg-2/60">
+            <div className="p-5 md:p-7 bg-bg-2/60">
               <div className="meta-row mb-3">
                 <h3 className="font-display text-2xl md:text-3xl">Northwind Health</h3>
                 <span className="font-display text-cyan2 text-xl">−6 hrs <span className="text-faint text-sm font-body">/wk per clinician</span></span>
@@ -125,7 +125,7 @@ export default function Work() {
               </div>
               <div className="absolute left-6 top-6 z-10 font-mono text-[11px] text-muted">03 — SUPPLY CHAIN / OPERATIONS</div>
             </div>
-            <div className="p-7 bg-bg-2/60">
+            <div className="p-5 md:p-7 bg-bg-2/60">
               <div className="meta-row mb-3">
                 <h3 className="font-display text-2xl md:text-3xl">Vanta Logistics</h3>
                 <span className="font-display text-cyan2 text-xl">+23% <span className="text-faint text-sm font-body">freight margin</span></span>
@@ -173,7 +173,7 @@ export default function Work() {
               </div>
               <div className="absolute left-6 top-6 z-10 font-mono text-[11px] text-muted">04 — CREATIVE / SAAS</div>
             </div>
-            <div className="p-7 bg-bg-2/60">
+            <div className="p-5 md:p-7 bg-bg-2/60">
               <div className="meta-row mb-3">
                 <h3 className="font-display text-2xl md:text-3xl">Lumen Studio</h3>
                 <span className="font-display text-cyan2 text-xl">40k <span className="text-faint text-sm font-body">seats in 90 days</span></span>

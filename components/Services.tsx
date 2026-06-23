@@ -43,9 +43,9 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 md:py-32">
+    <section id="services" className="py-16 md:py-24 lg:py-32">
       <div className="shell">
-        <div className="kicker-row mb-16">
+        <div className="kicker-row mb-10 md:mb-16">
           <div className="section-head">
             <p className="eyebrow" data-reveal="fade">01 / Capabilities</p>
             <h2
