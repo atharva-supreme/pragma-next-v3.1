@@ -55,7 +55,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
             <div>
               <h4 className="font-mono text-[11px] tracking-[0.2em] text-faint uppercase mb-5">Studio</h4>
-              <ul className="space-y-3 text-muted">
+              <ul className="space-y-3 text-muted list-none">
                 {[
                   { label: "Capabilities", href: "#services" },
                   { label: "Work", href: "#work" },
@@ -70,7 +70,7 @@ export default function Footer() {
             </div>
             <div>
               <h4 className="font-mono text-[11px] tracking-[0.2em] text-faint uppercase mb-5">Company</h4>
-              <ul className="space-y-3 text-muted">
+              <ul className="space-y-3 text-muted list-none">
                 {["About", "Careers", "Journal", "Contact"].map((l) => (
                   <li key={l}>
                     <a href={l === "Contact" ? "#contact" : "#"} className="hover:text-ink transition-colors" data-cursor="hover">{l}</a>
@@ -80,7 +80,7 @@ export default function Footer() {
             </div>
             <div>
               <h4 className="font-mono text-[11px] tracking-[0.2em] text-faint uppercase mb-5">Contact</h4>
-              <ul className="space-y-3 text-muted">
+              <ul className="space-y-3 text-muted list-none">
                 <li>
                   <a href="mailto:hello@pragma.studio" className="hover:text-ink transition-colors" data-cursor="hover">hello@pragma.studio</a>
                 </li>

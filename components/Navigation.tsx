@@ -6,6 +6,8 @@ import {
   Database,
   Compass,
 } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 const LogoMark = () => (
   <svg className="logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
@@ -50,7 +52,7 @@ export default function Navigation() {
     <>
       <header className="nav">
         <div className="shell w-full flex items-center justify-between">
-          <a
+          {/* <a
             href="#hero"
             className="flex items-center gap-3 group"
             aria-label="Pragma Softwares home"
@@ -59,7 +61,18 @@ export default function Navigation() {
             <span className="font-display font-semibold text-[17px] tracking-tight">
               Pragma<span className="text-faint font-normal"> Softwares</span>
             </span>
-          </a>
+          </a> */}
+
+          <Link href="/" className="shrink-0">
+            <Image
+              src="/images/pragma-logo.webp"
+              className="w-[150px] md:w-[180px] h-auto brightness-0 invert"
+              width={0}
+              height={0}
+              unoptimized
+              alt="Pragma Softwares logo"
+            />
+          </Link>
 
           <nav className="hidden lg:flex items-center gap-9" aria-label="Primary">
             <div className="nav-drop-root" data-panel="work">
@@ -90,7 +103,7 @@ export default function Navigation() {
           <div className="flex items-center gap-3">
             <a
               href="#contact"
-              className="btn btn-primary hidden sm:inline-flex"
+              className="btn btn-primary hidden sm:inline-flex max-lg:hidden"
               data-cursor="hover"
             >
               Start a project <span className="btn-ico" aria-hidden="true">→</span>

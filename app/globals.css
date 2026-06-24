@@ -634,7 +634,7 @@ body.tab-hidden .grain { animation-play-state: paused; }
 /* ---------- FOOTER ---------- */
 .footer-word {
   font-family: "Cerebri Sans", sans-serif; font-weight: 700; line-height: 0.8;
-  letter-spacing: -0.04em; font-size: clamp(64px, 19vw, 320px);
+  letter-spacing: -0.04em; font-size: clamp(64px, 19vw, 260px);
   background: linear-gradient(180deg, #2a2a3a, #0f0f17); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
@@ -765,6 +765,19 @@ body.tab-hidden .grain { animation-play-state: paused; }
 .hero-vignette {
   position: absolute; inset: 0;
   background: radial-gradient(ellipse at center, transparent 55%, rgba(5,5,10,.45) 100%);
+}
+
+/* Hero: clear the fixed header on tablet & below.
+   Desktop centers fine (short copy + side cards give the centered block
+   headroom), but the single-column stack below lg is tall enough that
+   `items-center` pushes the status pill up under the fixed nav. Pin the
+   stack below the header instead. Scoped to lg- so desktop is untouched. */
+@media (max-width: 1023.98px) {
+  #hero {
+    align-items: flex-start;
+    padding-top: calc(var(--nav-h) + 28px);
+    padding-bottom: 48px;
+  }
 }
 
 .text-grad {
